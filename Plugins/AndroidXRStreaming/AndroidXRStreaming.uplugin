@@ -1,0 +1,45 @@
+{
+    "FileVersion": 3,
+    "Version": 1,
+    "VersionName": "0.9.0",
+    "IsExperimentalVersion": false,
+    "IsBetaVersion": true,
+    "Modules": [
+        {
+            "Name": "AndroidXRStreamingEditor",
+            "Type": "Editor",
+            "LoadingPhase": "PostEngineInit",
+            "PlatformAllowList": [ "Win64" ]
+        },
+        {
+            "Name": "AndroidXRStreaming",
+            "Type": "Editor",
+            "LoadingPhase": "PostConfigInit",
+            "PlatformAllowList": [ "Win64" ]
+        }
+    ],
+    "FriendlyName": "AndroidXRStreaming",
+    "Description": "AndroidXRStreaming plugin. Handles settings for enabling AndroidXR Streaming",
+    "Category": "Virtual Reality",
+    "CreatedBy": "Google, Inc.",
+    "CreatedByURL": "",
+    "DocsURL": "",
+    "MarketplaceURL": "",
+    "SupportURL": "",
+    "CanContainContent": false,
+    "Installed": false,
+    "Plugins": [
+        {
+            "Name": "EditorScriptingUtilities",
+            "Enabled": true
+        },
+        {
+            "Name": "AndroidXR",
+            "Enabled": true
+        }
+    ],
+    "HasExplicitPlatforms": true,
+    "SupportedTargetPlatforms": [
+        "Win64"
+    ]
+}

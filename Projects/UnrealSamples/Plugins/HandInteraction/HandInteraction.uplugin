@@ -1,0 +1,39 @@
+{
+    "FileVersion": 3,
+    "Version": 1,
+    "VersionName": "0.9.0",
+    "IsBetaVersion": true,
+    "IsExperimentalVersion": true,
+    "FriendlyName": "HandInteraction",
+    "Description": "HandInteraction",
+    "Category": "Virtual Reality",
+    "CreatedBy": "Google, Inc.",
+    "DocsURL": "",
+    "MarketplaceURL": "",
+    "SupportURL": "",
+    "EnabledByDefault": false,
+    "CanContainContent": false,
+    "Installed": false,
+    "SupportedTargetPlatforms": [
+        "Android"
+    ],
+    "Modules": [
+        {
+            "Name": "HandInteraction",
+            "Type": "Runtime",
+            "LoadingPhase": "PostConfigInit",
+            "PlatformAllowList": [
+                "Win64",
+                "Mac",
+                "Linux",
+                "Android"
+            ]
+        }
+    ],
+    "Plugins": [
+        {
+            "Name": "AndroidXR",
+            "Enabled": true
+        }
+    ]
+}

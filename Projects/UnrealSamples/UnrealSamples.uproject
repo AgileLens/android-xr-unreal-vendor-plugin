@@ -1,0 +1,137 @@
+{
+    "FileVersion": 3,
+    "EngineAssociation": "5.6",
+    "Category": "",
+    "Description": "",
+    "Modules": [
+        {
+            "Name": "UnrealSamples",
+            "Type": "Runtime",
+            "LoadingPhase": "Default",
+            "AdditionalDependencies": [
+                "Engine",
+                "UMG"
+            ]
+        }
+    ],
+    "Plugins": [
+        {
+            "Name": "ModelingToolsEditorMode",
+            "Enabled": true,
+            "TargetAllowList": [
+                "Editor"
+            ]
+        },
+        {
+            "Name": "AndroidXR",
+            "Enabled": true,
+            "SupportedTargetPlatforms": [
+                "Android"
+            ]
+        },
+        {
+            "Name": "AndroidXRStreaming",
+            "Enabled": true,
+            "TargetAllowList": [
+                "Editor"
+            ],
+            "SupportedTargetPlatforms": [
+                "Win64",
+            ]
+        },
+        {
+            "Name": "AndroidXRTrackablesCore",
+            "Enabled": true,
+            "SupportedTargetPlatforms": [
+                "Android"
+            ]
+        },
+        {
+            "Name": "AndroidXRPerformanceMetrics",
+            "Enabled": true,
+            "SupportedTargetPlatforms": [
+                "Android"
+            ]
+        },
+        {
+            "Name": "OpenXRHandTracking",
+            "Enabled": true,
+            "SupportedTargetPlatforms": [
+                "Win64",
+                "Linux",
+                "Android"
+            ]
+        },
+        {
+            "Name": "AndroidXRDeviceAnchorPersistence",
+            "Enabled": true,
+            "SupportedTargetPlatforms": [
+                "Android"
+            ]
+        },
+        {
+            "Name": "AndroidXRDepthTexture",
+            "Enabled": true,
+            "SupportedTargetPlatforms": [
+                "Android"
+            ]
+        },
+        {
+            "Name": "HandTrackingMesh",
+            "Enabled": true,
+            "SupportedTargetPlatforms": [
+                "Android"
+            ]
+        },
+        {
+            "Name": "XRBase",
+            "Enabled": true
+        },
+        {
+            "Name": "HandInteraction",
+            "Enabled": true,
+            "SupportedTargetPlatforms": [
+                "Android"
+            ]
+        },
+        {
+            "Name": "HandInteractionInputDevice",
+            "Enabled": true,
+            "SupportedTargetPlatforms": [
+                "Android"
+            ]
+        },
+        {
+            "Name": "AndroidXRFaceTracking",
+            "Enabled": true,
+            "SupportedTargetPlatforms": [
+                "Android"
+            ]
+        },
+        {
+            "Name": "AndroidXREyeTracking",
+            "Enabled": true,
+            "SupportedTargetPlatforms": [
+                "Android"
+            ]
+        },
+        {
+            "Name": "AndroidXRSceneMeshing",
+            "Enabled": true,
+            "SupportedTargetPlatforms": [
+                "Android"
+            ]
+        },
+        {
+            "Name": "AndroidXRPassthroughMesh",
+            "Enabled": true,
+            "SupportedTargetPlatforms": [
+                "Android"
+            ]
+        },
+        {
+            "Name": "UdpMessaging",
+            "Enabled": false
+        }
+    ]
+}
