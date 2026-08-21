@@ -1,0 +1,27 @@
+{
+	"TargetName": "UnrealSamples",
+	"Platform": "Android",
+	"Configuration": "Development",
+	"BuildSettingsVersion": "V5",
+	"TargetBuildEnvironment": "Shared",
+	"TargetType": "Game",
+	"IsTestTarget": false,
+	"Architecture": "arm64",
+	"Project": "../../UnrealSamples.uproject",
+	"Version": 
+	{
+		"MajorVersion": 5,
+		"MinorVersion": 8,
+		"PatchVersion": 1,
+		"Changelist": 56057345,
+		"CompatibleChangelist": 55116800,
+		"IsLicenseeVersion": 0,
+		"IsPromotedBuild": 0,
+		"BranchName": "++UE5+Release-5.8",
+		"BuildId": "55116800"
+	},
+	"BuildProducts": [
+	],
+	"RuntimeDependencies": [
+	]
+}

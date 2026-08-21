@@ -29,6 +29,7 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.hardware.input.InputManager;
+import android.hardware.BatteryState;
 import android.view.InputDevice;
         </insert>
     </gameActivityImportAdditions>
@@ -162,6 +163,42 @@ import android.view.InputDevice;
     public String AndroidThunkJava_GetGamepadMotionDeviceName()
     {
         return GamepadMotion_DeviceName;
+    }
+
+    /**
+     * Battery charge of the attached controller, 0..1, or -1 when unknown.
+     * Wireless gamepads report this through the input device rather than
+     * through the system battery manager.
+     */
+    public float AndroidThunkJava_GetGamepadBatteryLevel()
+    {
+        if (GamepadMotion_DeviceId &lt; 0)
+        {
+            return -1.0f;
+        }
+        InputManager inputManager = (InputManager) getSystemService(INPUT_SERVICE);
+        if (inputManager == null)
+        {
+            return -1.0f;
+        }
+        InputDevice device = inputManager.getInputDevice(GamepadMotion_DeviceId);
+        if (device == null)
+        {
+            return -1.0f;
+        }
+        try
+        {
+            BatteryState battery = device.getBatteryState();
+            if (battery != null &amp;&amp; battery.isPresent())
+            {
+                return battery.getCapacity();
+            }
+        }
+        catch (Throwable t)
+        {
+            // Not all devices report a battery state.
+        }
+        return -1.0f;
     }
 
     private void GamepadMotion_OnSensorEvent(SensorEvent event)

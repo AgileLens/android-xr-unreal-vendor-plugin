@@ -166,10 +166,14 @@ FString AGamepadMotionActor::GetStatusText() const
 	// read ~9.81 m/s^2. A wildly different value means the axes or scaling are
 	// wrong, which is otherwise easy to miss.
 	const float AccelMagnitude = Accel.Size();
+	const float Battery = Motion->GetBatteryLevel();
+	const FString BatteryText = Battery >= 0.0f
+		? FString::Printf(TEXT("%3.0f%%"), Battery * 100.0f)
+		: TEXT("n/a");
 
 	return FString::Printf(TEXT(
 		"%s\n"
-		"rate      %5.0f Hz\n"
+		"rate      %5.0f Hz     battery %s\n"
 		"\n"
 		"gyro      %7.2f %7.2f %7.2f  rad/s\n"
 		"accel     %7.2f %7.2f %7.2f  m/s\u00B2\n"
@@ -181,7 +185,7 @@ FString AGamepadMotionActor::GetStatusText() const
 		"\n"
 		"Press A to recenter"),
 		*Motion->GetDeviceName(),
-		Motion->GetSampleRateHz(),
+		Motion->GetSampleRateHz(), *BatteryText,
 		Gyro.X, Gyro.Y, Gyro.Z,
 		Accel.X, Accel.Y, Accel.Z,
 		AccelMagnitude,

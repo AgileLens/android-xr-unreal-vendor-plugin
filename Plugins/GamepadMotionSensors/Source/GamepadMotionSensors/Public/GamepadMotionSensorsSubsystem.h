@@ -82,6 +82,13 @@ public:
     UFUNCTION(BlueprintPure, Category = "Gamepad Motion Sensors")
     float GetSampleRateHz() const;
 
+    /**
+     * Battery charge of the attached controller, 0..1. Returns -1 when the
+     * device does not report one, or when nothing is attached.
+     */
+    UFUNCTION(BlueprintPure, Category = "Gamepad Motion Sensors")
+    float GetBatteryLevel() const;
+
     /** Resets orientation to identity. Bind this to a button. */
     UFUNCTION(BlueprintCallable, Category = "Gamepad Motion Sensors")
     void Recenter();

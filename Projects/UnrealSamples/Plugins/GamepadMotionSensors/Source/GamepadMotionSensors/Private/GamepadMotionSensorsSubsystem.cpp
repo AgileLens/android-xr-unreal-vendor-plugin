@@ -208,6 +208,23 @@ FVector UGamepadMotionSensorsSubsystem::GetAcceleration() const
     return S.Accel;
 }
 
+float UGamepadMotionSensorsSubsystem::GetBatteryLevel() const
+{
+#if PLATFORM_ANDROID
+    if (JNIEnv* Env = FAndroidApplication::GetJavaEnv())
+    {
+        static jmethodID Method = FJavaWrapper::FindMethod(Env,
+            FJavaWrapper::GameActivityClassID,
+            "AndroidThunkJava_GetGamepadBatteryLevel", "()F", false);
+        if (Method != nullptr)
+        {
+            return FJavaWrapper::CallFloatMethod(Env, FJavaWrapper::GameActivityThis, Method);
+        }
+    }
+#endif
+    return -1.0f;
+}
+
 float UGamepadMotionSensorsSubsystem::GetSampleRateHz() const
 {
     FGamepadMotionState& S = State();
