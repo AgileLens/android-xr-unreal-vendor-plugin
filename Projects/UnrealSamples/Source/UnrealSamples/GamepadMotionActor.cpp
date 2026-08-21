@@ -32,11 +32,16 @@ namespace
 	constexpr float GamepadRetryIntervalSeconds = 2.0f;
 
 	/**
-	 * Long on X (the pointing axis), medium on Y, thin on Z -- distinct on all
-	 * three axes so the mesh's orientation is unambiguous, which a uniform cube
-	 * cannot convey.
+	 * Distinct on all three axes so the mesh's orientation is unambiguous, which
+	 * a uniform cube cannot convey.
+	 *
+	 * The long extent is on Y, not X: the controller's pointing direction maps to
+	 * Unreal's Y here, so putting the length on X left the shape reading 90 degrees
+	 * off in yaw. A box rotated 90 degrees about Z is equivalent to swapping its X
+	 * and Y extents, so this is expressed as a swap rather than an extra rotation --
+	 * a relative rotation would be overwritten by the SetWorldRotation in Tick.
 	 */
-	const FVector ControllerProportions(1.45f, 0.55f, 0.32f);
+	const FVector ControllerProportions(0.55f, 1.45f, 0.32f);
 }
 
 AGamepadMotionActor::AGamepadMotionActor()
