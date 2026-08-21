@@ -188,6 +188,10 @@
         {
             "Name": "UdpMessaging",
             "Enabled": false
+        },
+        {
+            "Name": "GamepadMotionSensors",
+            "Enabled": true
         }
     ]
 }

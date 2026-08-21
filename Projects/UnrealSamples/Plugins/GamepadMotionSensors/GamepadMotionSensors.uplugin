@@ -1,0 +1,33 @@
+{
+    "FileVersion": 3,
+    "Version": 1,
+    "VersionName": "1.0.0",
+    "IsExperimentalVersion": false,
+    "IsBetaVersion": false,
+    "FriendlyName": "Gamepad Motion Sensors",
+    "Description": "Exposes the accelerometer and gyroscope of a connected Bluetooth gamepad via InputDevice.getSensorManager(), providing 3DoF orientation on devices without tracked 6DoF controllers.",
+    "Category": "Other",
+    "CreatedBy": "Google, Inc.",
+    "CreatedByURL": "",
+    "DocsURL": "",
+    "MarketplaceURL": "",
+    "SupportURL": "",
+    "CanContainContent": true,
+    "Installed": false,
+    "SupportedTargetPlatforms": [
+        "Android"
+    ],
+    "Modules": [
+        {
+            "Name": "GamepadMotionSensors",
+            "Type": "Runtime",
+            "LoadingPhase": "PostConfigInit",
+            "PlatformAllowList": [
+                "Win64",
+                "Mac",
+                "Linux",
+                "Android"
+            ]
+        }
+    ]
+}
