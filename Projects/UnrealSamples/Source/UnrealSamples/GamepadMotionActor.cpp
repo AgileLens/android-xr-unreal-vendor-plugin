@@ -30,6 +30,13 @@ namespace
 {
 	/** How often to retry attaching, in seconds, while no gamepad is present. */
 	constexpr float GamepadRetryIntervalSeconds = 2.0f;
+
+	/**
+	 * Long on X (the pointing axis), medium on Y, thin on Z -- distinct on all
+	 * three axes so the mesh's orientation is unambiguous, which a uniform cube
+	 * cannot convey.
+	 */
+	const FVector ControllerProportions(1.45f, 0.55f, 0.32f);
 }
 
 AGamepadMotionActor::AGamepadMotionActor()
@@ -45,10 +52,10 @@ AGamepadMotionActor::AGamepadMotionActor()
 	Mesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Mesh"));
 	Mesh->SetupAttachment(Pivot);
 
-	// Proportioned like a hand-held controller rather than a cube, so which way
-	// it is pointing is readable at a glance: long on X (the pointing axis),
-	// medium on Y (width), thin on Z.
-	Mesh->SetRelativeScale3D(FVector(1.45f, 0.55f, 0.32f));
+	// Applies to newly-dropped actors only. An actor already saved in a level
+	// carries its own serialized component transform, which overrides this, so
+	// the proportions are re-applied in BeginPlay as well.
+	Mesh->SetRelativeScale3D(ControllerProportions);
 
 	// Fall back to the engine cube so the actor is visible when dropped into a
 	// level without further setup.
@@ -104,6 +111,14 @@ UGamepadMotionSensorsSubsystem* AGamepadMotionActor::GetMotionSubsystem() const
 void AGamepadMotionActor::BeginPlay()
 {
 	Super::BeginPlay();
+
+	// Re-assert the proportions: a level-placed actor's serialized component
+	// transform takes precedence over the constructor default, so a cube saved
+	// before this shape existed would otherwise stay a cube.
+	if (Mesh)
+	{
+		Mesh->SetRelativeScale3D(ControllerProportions);
+	}
 
 	// Safe here: BeginPlay is guaranteed to run on the game thread.
 	if (BaseMaterial)
