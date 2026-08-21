@@ -90,4 +90,14 @@ private:
 
 	/** Briefly confirms a recenter happened, since the cube snapping is subtle. */
 	float RecenterFlashSeconds = 0.0f;
+
+	/**
+	 * Yaw of the viewer at the last recenter. The controller reports orientation
+	 * in its own frame, which has no relationship to where the user is looking,
+	 * so recentring aligns that frame to the current gaze direction.
+	 */
+	float RecenterYaw = 0.0f;
+
+	/** How far in front of the viewer to place the actor on recenter, in cm. */
+	static constexpr float RecenterDistance = 90.0f;
 };

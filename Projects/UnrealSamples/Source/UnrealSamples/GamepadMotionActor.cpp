@@ -18,6 +18,8 @@
 #include "Components/StaticMeshComponent.h"
 #include "Components/TextRenderComponent.h"
 #include "Components/SceneComponent.h"
+#include "Camera/PlayerCameraManager.h"
+#include "GameFramework/PlayerController.h"
 #include "Materials/Material.h"
 #include "Materials/MaterialInstanceDynamic.h"
 #include "Components/InputComponent.h"
@@ -207,7 +209,10 @@ void AGamepadMotionActor::Tick(float DeltaSeconds)
 		return;
 	}
 
-	Mesh->SetWorldRotation(Motion->GetOrientationQuat());
+	// Compose the controller's own orientation with the gaze frame captured at the
+	// last recenter, so "forward" for the controller means "away from the viewer".
+	const FQuat GazeFrame(FRotator(0.0f, RecenterYaw, 0.0f));
+	Mesh->SetWorldRotation(GazeFrame * Motion->GetOrientationQuat());
 
 	if (StatusText)
 	{
@@ -217,11 +222,37 @@ void AGamepadMotionActor::Tick(float DeltaSeconds)
 
 void AGamepadMotionActor::Recenter()
 {
-	if (UGamepadMotionSensorsSubsystem* Motion = GetMotionSubsystem())
+	UGamepadMotionSensorsSubsystem* Motion = GetMotionSubsystem();
+	if (Motion == nullptr)
 	{
-		Motion->Recenter();
-		RecenterFlashSeconds = 0.6f;
+		return;
 	}
+
+	Motion->Recenter();
+	RecenterFlashSeconds = 0.6f;
+
+	// The controller's orientation frame is arbitrary relative to the viewer, so
+	// recentring also adopts the current gaze: the actor moves in front of the
+	// viewer, turns to face them, and the controller's zeroed forward is aligned
+	// to where they are looking.
+	const UWorld* World = GetWorld();
+	const APlayerController* PC = World ? World->GetFirstPlayerController() : nullptr;
+	const APlayerCameraManager* Camera = PC ? PC->PlayerCameraManager : nullptr;
+	if (Camera == nullptr)
+	{
+		return;
+	}
+
+	const FVector ViewLocation = Camera->GetCameraLocation();
+	const FRotator ViewRotation = Camera->GetCameraRotation();
+
+	RecenterYaw = ViewRotation.Yaw;
+
+	// Place it at eye height in front of the viewer, ignoring pitch so it does not
+	// end up on the floor or overhead when they happen to be looking up or down.
+	const FVector Forward = FRotator(0.0f, ViewRotation.Yaw, 0.0f).Vector();
+	SetActorLocation(ViewLocation + Forward * RecenterDistance);
+	SetActorRotation(FRotator(0.0f, ViewRotation.Yaw, 0.0f));
 }
 
 bool AGamepadMotionActor::IsGamepadMotionAvailable() const
