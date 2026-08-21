@@ -1,5 +1,32 @@
 # Android XR Plugins for Unreal
 
+> ### This is a fork
+>
+> An [Agile Lens](https://github.com/AgileLens) fork of
+> [android-xr/android-xr-unreal-vendor-plugin](https://github.com/android-xr/android-xr-unreal-vendor-plugin),
+> with two build fixes and one additional plugin. **See [FORK_NOTES.md](FORK_NOTES.md)
+> for the detail.** Everything here is offered upstream; the fork exists so the
+> changes are usable now rather than gated on a review cycle.
+>
+> **Fixed — the upstream repo does not build from a fresh clone.** Two
+> `File.WriteAllText` calls in `AndroidXR.Build.cs` write into plugin
+> `Intermediate/` directories without creating them, so module instantiation
+> fails before anything compiles. The second instance affects every plugin that
+> depends on `AndroidXR`. (Also worth knowing: clone to a short path — the
+> generated tree exceeds the Windows 260-character limit from a normally-named
+> directory.)
+>
+> **Added — `GamepadMotionSensors` (plugin 23 below).** Exposes a connected
+> Bluetooth gamepad's accelerometer and gyroscope through
+> `InputDevice.getSensorManager()` (API 31+), giving 3DoF orientation from an
+> ordinary game controller. Useful on Android XR hardware that does not declare
+> `android.hardware.xr.input.controller`, where hand tracking is otherwise the
+> only input — and as gamepad support generally. Ships with a `GamepadMotion`
+> sample level: a wand-shaped mesh that rotates with the controller, a live
+> readout of sensor values and battery, and gaze-aware recentring.
+>
+> Verified on device against stock UE 5.6 targeting Android.
+
 1.  AndroidXR: required for all Android XR Extensions' features.
 2.  Depth Texture
 3.  Device Anchor Persistence
@@ -22,6 +49,7 @@
 20. Spatial Plane Tracking
 21. Spatial Anchors
 22. System Extension Properties
+23. Gamepad Motion Sensors *(added in this fork — see [FORK_NOTES.md](FORK_NOTES.md))*
 
 ## Supported Development Platforms
 - Windows
