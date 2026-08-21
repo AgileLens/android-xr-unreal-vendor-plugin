@@ -47,19 +47,16 @@ AGamepadMotionActor::AGamepadMotionActor()
 	}
 
 	// The default material on BasicShapes is the world grid, which reads as
-	// "unconfigured" rather than as a deliberate sample. Use a plain lit
-	// material so the cube's faces shade distinctly as it rotates, which is
-	// what makes the orientation legible in the first place.
-	static ConstructorHelpers::FObjectFinder<UMaterial> BaseMaterial(
+	// "unconfigured" rather than as a deliberate sample. Only the asset
+	// reference is resolved here -- the dynamic instance is created in
+	// BeginPlay, because UObject constructors can run on async-loading worker
+	// threads and touching the render proxy there trips
+	// "Assertion failed: IsInGameThread()" in RendererScene.
+	static ConstructorHelpers::FObjectFinder<UMaterial> BaseMaterialFinder(
 		TEXT("/Engine/BasicShapes/BasicShapeMaterial.BasicShapeMaterial"));
-	if (BaseMaterial.Succeeded())
+	if (BaseMaterialFinder.Succeeded())
 	{
-		DynamicMaterial = UMaterialInstanceDynamic::Create(BaseMaterial.Object, this);
-		if (DynamicMaterial)
-		{
-			DynamicMaterial->SetVectorParameterValue(TEXT("Color"), FLinearColor(0.16f, 0.38f, 0.72f));
-			Mesh->SetMaterial(0, DynamicMaterial);
-		}
+		BaseMaterial = BaseMaterialFinder.Object;
 	}
 	Mesh->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 }
@@ -79,6 +76,17 @@ UGamepadMotionSensorsSubsystem* AGamepadMotionActor::GetMotionSubsystem() const
 void AGamepadMotionActor::BeginPlay()
 {
 	Super::BeginPlay();
+
+	// Safe here: BeginPlay is guaranteed to run on the game thread.
+	if (BaseMaterial)
+	{
+		DynamicMaterial = UMaterialInstanceDynamic::Create(BaseMaterial, this);
+		if (DynamicMaterial)
+		{
+			DynamicMaterial->SetVectorParameterValue(TEXT("Color"), FLinearColor(0.16f, 0.38f, 0.72f));
+			Mesh->SetMaterial(0, DynamicMaterial);
+		}
+	}
 
 	if (UGamepadMotionSensorsSubsystem* Motion = GetMotionSubsystem())
 	{

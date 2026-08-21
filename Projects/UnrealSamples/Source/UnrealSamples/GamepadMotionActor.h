@@ -66,6 +66,10 @@ public:
 private:
 	UGamepadMotionSensorsSubsystem* GetMotionSubsystem() const;
 
+	/** Resolved in the constructor; the dynamic instance is made in BeginPlay. */
+	UPROPERTY()
+	TObjectPtr<class UMaterial> BaseMaterial;
+
 	/** Material instance so the cube shades as a solid object, not world grid. */
 	UPROPERTY()
 	TObjectPtr<class UMaterialInstanceDynamic> DynamicMaterial;
