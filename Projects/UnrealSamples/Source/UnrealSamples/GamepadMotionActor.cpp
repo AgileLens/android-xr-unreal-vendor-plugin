@@ -1,0 +1,189 @@
+/* Copyright 2026 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+#include "GamepadMotionActor.h"
+
+#include "Components/StaticMeshComponent.h"
+#include "Materials/Material.h"
+#include "Materials/MaterialInstanceDynamic.h"
+#include "Components/InputComponent.h"
+#include "Engine/GameInstance.h"
+#include "GamepadMotionSensorsSubsystem.h"
+#include "GameFramework/InputSettings.h"
+#include "UObject/ConstructorHelpers.h"
+
+namespace
+{
+	/** How often to retry attaching, in seconds, while no gamepad is present. */
+	constexpr float GamepadRetryIntervalSeconds = 2.0f;
+}
+
+AGamepadMotionActor::AGamepadMotionActor()
+{
+	PrimaryActorTick.bCanEverTick = true;
+
+	Mesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Mesh"));
+	RootComponent = Mesh;
+
+	// Fall back to the engine cube so the actor is visible when dropped into a
+	// level without further setup.
+	static ConstructorHelpers::FObjectFinder<UStaticMesh> CubeMesh(
+		TEXT("/Engine/BasicShapes/Cube.Cube"));
+	if (CubeMesh.Succeeded())
+	{
+		Mesh->SetStaticMesh(CubeMesh.Object);
+	}
+
+	// The default material on BasicShapes is the world grid, which reads as
+	// "unconfigured" rather than as a deliberate sample. Use a plain lit
+	// material so the cube's faces shade distinctly as it rotates, which is
+	// what makes the orientation legible in the first place.
+	static ConstructorHelpers::FObjectFinder<UMaterial> BaseMaterial(
+		TEXT("/Engine/BasicShapes/BasicShapeMaterial.BasicShapeMaterial"));
+	if (BaseMaterial.Succeeded())
+	{
+		DynamicMaterial = UMaterialInstanceDynamic::Create(BaseMaterial.Object, this);
+		if (DynamicMaterial)
+		{
+			DynamicMaterial->SetVectorParameterValue(TEXT("Color"), FLinearColor(0.16f, 0.38f, 0.72f));
+			Mesh->SetMaterial(0, DynamicMaterial);
+		}
+	}
+	Mesh->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+}
+
+UGamepadMotionSensorsSubsystem* AGamepadMotionActor::GetMotionSubsystem() const
+{
+	if (const UWorld* World = GetWorld())
+	{
+		if (UGameInstance* GameInstance = World->GetGameInstance())
+		{
+			return GameInstance->GetSubsystem<UGamepadMotionSensorsSubsystem>();
+		}
+	}
+	return nullptr;
+}
+
+void AGamepadMotionActor::BeginPlay()
+{
+	Super::BeginPlay();
+
+	if (UGamepadMotionSensorsSubsystem* Motion = GetMotionSubsystem())
+	{
+		Motion->StartGamepadMotion();
+	}
+
+	// Recenter on the gamepad's bottom face button (A / cross).
+	if (APlayerController* PC = GetWorld() ? GetWorld()->GetFirstPlayerController() : nullptr)
+	{
+		EnableInput(PC);
+		if (InputComponent)
+		{
+			InputComponent->BindKey(EKeys::Gamepad_FaceButton_Bottom, IE_Pressed,
+				this, &AGamepadMotionActor::Recenter);
+		}
+	}
+}
+
+void AGamepadMotionActor::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
+{
+	if (PlayerInputComponent)
+	{
+		PlayerInputComponent->BindKey(EKeys::Gamepad_FaceButton_Bottom, IE_Pressed,
+			this, &AGamepadMotionActor::Recenter);
+	}
+}
+
+void AGamepadMotionActor::Tick(float DeltaSeconds)
+{
+	Super::Tick(DeltaSeconds);
+
+	UGamepadMotionSensorsSubsystem* Motion = GetMotionSubsystem();
+	if (Motion == nullptr)
+	{
+		return;
+	}
+
+	if (!Motion->IsAvailable())
+	{
+		// A controller may be switched on after the level loads.
+		RetryAccumulator += DeltaSeconds;
+		if (RetryAccumulator >= GamepadRetryIntervalSeconds)
+		{
+			RetryAccumulator = 0.0f;
+			Motion->StartGamepadMotion();
+		}
+		return;
+	}
+
+	Mesh->SetWorldRotation(Motion->GetOrientationQuat());
+}
+
+void AGamepadMotionActor::Recenter()
+{
+	if (UGamepadMotionSensorsSubsystem* Motion = GetMotionSubsystem())
+	{
+		Motion->Recenter();
+	}
+}
+
+bool AGamepadMotionActor::IsGamepadMotionAvailable() const
+{
+	const UGamepadMotionSensorsSubsystem* Motion = GetMotionSubsystem();
+	return Motion != nullptr && Motion->IsAvailable();
+}
+
+FString AGamepadMotionActor::GetStatusText() const
+{
+	const UGamepadMotionSensorsSubsystem* Motion = GetMotionSubsystem();
+	if (Motion == nullptr)
+	{
+		return TEXT("GamepadMotionSensors subsystem unavailable.");
+	}
+	if (!Motion->IsAvailable())
+	{
+		return TEXT("No gamepad with a gyroscope connected.\n"
+					"Pair a Bluetooth controller that reports motion sensors,\n"
+					"for example a PS5 DualSense.");
+	}
+
+	const FVector Gyro = Motion->GetAngularVelocity();
+	const FVector Accel = Motion->GetAcceleration();
+	const FRotator Rot = Motion->GetOrientation();
+	// Gravity magnitude is a useful sanity check: a stationary controller should
+	// read ~9.81 m/s^2. A wildly different value means the axes or scaling are
+	// wrong, which is otherwise easy to miss.
+	const float AccelMagnitude = Accel.Size();
+
+	return FString::Printf(TEXT(
+		"%s\n"
+		"rate      %5.0f Hz\n"
+		"\n"
+		"gyro      %7.2f %7.2f %7.2f  rad/s\n"
+		"accel     %7.2f %7.2f %7.2f  m/s\u00B2\n"
+		"|accel|   %7.2f  m/s\u00B2  (~9.81 at rest)\n"
+		"\n"
+		"pitch     %7.1f\u00B0\n"
+		"yaw       %7.1f\u00B0  (drifts - integrated)\n"
+		"roll      %7.1f\u00B0\n"
+		"\n"
+		"Press A to recenter"),
+		*Motion->GetDeviceName(),
+		Motion->GetSampleRateHz(),
+		Gyro.X, Gyro.Y, Gyro.Z,
+		Accel.X, Accel.Y, Accel.Z,
+		AccelMagnitude,
+		Rot.Pitch, Rot.Yaw, Rot.Roll);
+}
