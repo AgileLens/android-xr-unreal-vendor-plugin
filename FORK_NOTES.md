@@ -108,11 +108,26 @@ coordinates rather than raw sensor axes.
 
 ### Sample
 
-`AGamepadMotionActor` (`Projects/UnrealSamples/Source/UnrealSamples/`) rotates a
-mesh to match the controller and displays live sensor data on screen. It follows
-the same C++-sample-actor pattern as the existing `HandTracking` and `Plane`
-actors, retries attachment while no controller is present, and binds the bottom
-face button to recenter.
+`AGamepadMotionActor` (`Projects/UnrealSamples/Source/UnrealSamples/`) follows the
+same C++-sample-actor pattern as the existing `HandTracking` and `Plane` actors.
+
+- A wand-proportioned mesh rotates with the controller. Distinct extents on all
+  three axes make its aim readable; a uniform cube cannot convey yaw versus roll.
+- An in-world `UTextRenderComponent` shows device, sample rate, battery, gyro,
+  accelerometer, gravity magnitude and euler angles — no UMG or Blueprint setup
+  required, and it reports *why* nothing is tracking when no controller is found.
+- Attachment is retried while no controller is present, so a pad switched on
+  after level load is picked up.
+- **Any face button recentres.** This does more than zero the orientation: a
+  gamepad's IMU reports in its own arbitrary frame with no relation to the
+  viewer, so recentring also captures the viewer's yaw and composes it with the
+  controller orientation. Zeroed-forward then means *away from the viewer*. The
+  actor also moves in front of the viewer at eye height and turns to face them.
+
+Two structural details worth copying: the readout is a **sibling** of the mesh
+under a fixed pivot, not a child, or it inherits the controller's rotation and
+spends most of its time facing away; and the mesh proportions and dynamic
+material are applied in `BeginPlay`, not the constructor — see below.
 
 ---
 
@@ -127,8 +142,9 @@ LogGamepadMotionSensors: No connected input device exposes a gyroscope.
 LogGamepadMotionSensors: Attached to gamepad motion sensors: DualSense Wireless Controller
 ```
 
-The cube tracks the controller's orientation in the headset. The repeated
-"no device" lines are the sample's retry loop, which picks the controller up
+The mesh tracks the controller's orientation in the headset, the on-screen
+readout reports live sensor values, and recentring works. The repeated "no
+device" lines are the sample's retry loop, which picks the controller up
 whenever it connects after level load — including after a battery-flat
 reconnect, which is how it got exercised.
 
@@ -143,8 +159,8 @@ Each build layer was also checked individually rather than by exit code alone:
 
 ## If you copy this plugin pattern
 
-Two conventions in this repo are easy to half-adopt, and both fail in ways that
-are hard to attribute:
+Three things cost real time here, each failing in a way that is hard to
+attribute to its cause:
 
 **1. `SupportedTargetPlatforms` must be declared in *both* places.** A `.uplugin`
 that declares it needs the same field on its `.uproject` reference, matching how
@@ -160,7 +176,22 @@ Notably this did **not** reproduce on every host/platform combination we built
 on — one toolchain accepted it and another rejected it. Building the same source
 on a second platform is a real check, not redundancy.
 
-**2. UPL is XML, so Java operators inside it must be escaped.** `&&` becomes
+**2. `BeginPlay`, not the constructor, for anything visual.** Two separate
+failures here. `UMaterialInstanceDynamic::Create()` and `SetMaterial()` in a
+constructor crash on load, because UObject constructors can run on async-loading
+worker threads and those calls touch the render proxy:
+
+```
+Assertion failed: IsInGameThread() || IsInParallelGameThread()
+[File:./Runtime/Renderer/Private/RendererScene.cpp] [Line: 6866]
+```
+
+And a component transform set in the constructor does **not** reach an actor
+already saved in a level — the serialized instance transform wins — so a mesh
+placed before a shape change silently keeps the old shape. Assert both in
+`BeginPlay`.
+
+**3. UPL is XML, so Java operators inside it must be escaped.** `&&` becomes
 `&amp;&amp;` and `<` becomes `&lt;`. Raw operators make the file invalid XML and
 UPL silently fails to apply. Validate before building:
 
