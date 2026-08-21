@@ -141,6 +141,33 @@ Each build layer was also checked individually rather than by exit code alone:
   `T Java_com_epicgames_unreal_GameActivity_nativeGamepadMotionUpdate`
 - APK packaged
 
+## If you copy this plugin pattern
+
+Two conventions in this repo are easy to half-adopt, and both fail in ways that
+are hard to attribute:
+
+**1. `SupportedTargetPlatforms` must be declared in *both* places.** A `.uplugin`
+that declares it needs the same field on its `.uproject` reference, matching how
+`HandInteractionInputDevice` is declared. Otherwise UBT fails target setup with:
+
+```
+GamepadMotionSensors.uplugin is referenced via UnrealSamples.uproject with a
+mismatched 'SupportedTargetPlatforms' field. This will cause problems in
+packaged builds
+```
+
+Notably this did **not** reproduce on every host/platform combination we built
+on — one toolchain accepted it and another rejected it. Building the same source
+on a second platform is a real check, not redundancy.
+
+**2. UPL is XML, so Java operators inside it must be escaped.** `&&` becomes
+`&amp;&amp;` and `<` becomes `&lt;`. Raw operators make the file invalid XML and
+UPL silently fails to apply. Validate before building:
+
+```bash
+python3 -c "import xml.etree.ElementTree as ET; ET.parse('YourPlugin_APL.xml')"
+```
+
 ## Suggested additions upstream
 
 Four shipped plugins have no sample level: `AndroidXRDeviceAnchorPersistence`,
