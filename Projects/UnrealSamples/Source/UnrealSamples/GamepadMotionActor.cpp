@@ -17,6 +17,7 @@
 
 #include "Components/StaticMeshComponent.h"
 #include "Components/TextRenderComponent.h"
+#include "Components/SceneComponent.h"
 #include "Materials/Material.h"
 #include "Materials/MaterialInstanceDynamic.h"
 #include "Components/InputComponent.h"
@@ -35,8 +36,19 @@ AGamepadMotionActor::AGamepadMotionActor()
 {
 	PrimaryActorTick.bCanEverTick = true;
 
+	// The readout must not inherit the controller's rotation, so the mesh and the
+	// text are siblings under a fixed pivot rather than the text being a child of
+	// the mesh. Only the mesh is rotated in Tick.
+	Pivot = CreateDefaultSubobject<USceneComponent>(TEXT("Pivot"));
+	RootComponent = Pivot;
+
 	Mesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Mesh"));
-	RootComponent = Mesh;
+	Mesh->SetupAttachment(Pivot);
+
+	// Proportioned like a hand-held controller rather than a cube, so which way
+	// it is pointing is readable at a glance: long on X (the pointing axis),
+	// medium on Y (width), thin on Z.
+	Mesh->SetRelativeScale3D(FVector(1.45f, 0.55f, 0.32f));
 
 	// Fall back to the engine cube so the actor is visible when dropped into a
 	// level without further setup.
@@ -64,8 +76,11 @@ AGamepadMotionActor::AGamepadMotionActor()
 	// The readout is rendered in world space rather than through UMG so the
 	// sample works when dropped into a level with no Blueprint or widget setup.
 	StatusText = CreateDefaultSubobject<UTextRenderComponent>(TEXT("StatusText"));
-	StatusText->SetupAttachment(RootComponent);
+	StatusText->SetupAttachment(Pivot);
 	StatusText->SetRelativeLocation(FVector(0.0f, 0.0f, 140.0f));
+	// TextRenderComponent's glyphs face +X by default, which points away from a
+	// viewer standing in front of the actor. Yaw 180 turns them around.
+	StatusText->SetRelativeRotation(FRotator(0.0f, 180.0f, 0.0f));
 	StatusText->SetRelativeScale3D(FVector(0.35f));
 	StatusText->SetHorizontalAlignment(EHTA_Center);
 	StatusText->SetVerticalAlignment(EVRTA_TextTop);

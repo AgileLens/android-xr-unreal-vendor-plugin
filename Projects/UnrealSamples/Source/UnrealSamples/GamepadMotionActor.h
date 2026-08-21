@@ -44,6 +44,10 @@ public:
 	virtual void Tick(float DeltaSeconds) override;
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent);
 
+	/** Non-rotating root, so the readout stays put while the mesh spins. */
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Gamepad Motion")
+	TObjectPtr<class USceneComponent> Pivot;
+
 	/** In-world readout, so the sample needs no UMG setup to be useful. */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Gamepad Motion")
 	TObjectPtr<class UTextRenderComponent> StatusText;
