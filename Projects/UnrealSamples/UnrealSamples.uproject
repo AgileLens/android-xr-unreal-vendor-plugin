@@ -191,7 +191,10 @@
         },
         {
             "Name": "GamepadMotionSensors",
-            "Enabled": true
+            "Enabled": true,
+            "SupportedTargetPlatforms": [
+                "Android"
+            ]
         }
     ]
 }
