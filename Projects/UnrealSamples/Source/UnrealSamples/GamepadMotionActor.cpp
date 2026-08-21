@@ -16,6 +16,7 @@
 #include "GamepadMotionActor.h"
 
 #include "Components/StaticMeshComponent.h"
+#include "Components/TextRenderComponent.h"
 #include "Materials/Material.h"
 #include "Materials/MaterialInstanceDynamic.h"
 #include "Components/InputComponent.h"
@@ -59,6 +60,18 @@ AGamepadMotionActor::AGamepadMotionActor()
 		BaseMaterial = BaseMaterialFinder.Object;
 	}
 	Mesh->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+
+	// The readout is rendered in world space rather than through UMG so the
+	// sample works when dropped into a level with no Blueprint or widget setup.
+	StatusText = CreateDefaultSubobject<UTextRenderComponent>(TEXT("StatusText"));
+	StatusText->SetupAttachment(RootComponent);
+	StatusText->SetRelativeLocation(FVector(0.0f, 0.0f, 140.0f));
+	StatusText->SetRelativeScale3D(FVector(0.35f));
+	StatusText->SetHorizontalAlignment(EHTA_Center);
+	StatusText->SetVerticalAlignment(EVRTA_TextTop);
+	StatusText->SetTextRenderColor(FColor(225, 233, 239));
+	StatusText->SetWorldSize(18.0f);
+	StatusText->SetText(FText::FromString(TEXT("Gamepad Motion")));
 }
 
 UGamepadMotionSensorsSubsystem* AGamepadMotionActor::GetMotionSubsystem() const
@@ -99,8 +112,17 @@ void AGamepadMotionActor::BeginPlay()
 		EnableInput(PC);
 		if (InputComponent)
 		{
-			InputComponent->BindKey(EKeys::Gamepad_FaceButton_Bottom, IE_Pressed,
-				this, &AGamepadMotionActor::Recenter);
+			// Bind all four so the sample works regardless of controller layout
+			// and the user does not have to guess which button calibrates.
+			const TArray<FKey> RecenterKeys = {
+				EKeys::Gamepad_FaceButton_Bottom, EKeys::Gamepad_FaceButton_Right,
+				EKeys::Gamepad_FaceButton_Left,   EKeys::Gamepad_FaceButton_Top,
+				EKeys::Gamepad_Special_Right
+			};
+			for (const FKey& Key : RecenterKeys)
+			{
+				InputComponent->BindKey(Key, IE_Pressed, this, &AGamepadMotionActor::Recenter);
+			}
 		}
 	}
 }
@@ -118,6 +140,16 @@ void AGamepadMotionActor::Tick(float DeltaSeconds)
 {
 	Super::Tick(DeltaSeconds);
 
+	if (RecenterFlashSeconds > 0.0f)
+	{
+		RecenterFlashSeconds = FMath::Max(0.0f, RecenterFlashSeconds - DeltaSeconds);
+		if (StatusText)
+		{
+			StatusText->SetTextRenderColor(RecenterFlashSeconds > 0.0f
+				? FColor(85, 188, 162) : FColor(225, 233, 239));
+		}
+	}
+
 	UGamepadMotionSensorsSubsystem* Motion = GetMotionSubsystem();
 	if (Motion == nullptr)
 	{
@@ -133,10 +165,19 @@ void AGamepadMotionActor::Tick(float DeltaSeconds)
 			RetryAccumulator = 0.0f;
 			Motion->StartGamepadMotion();
 		}
+		if (StatusText)
+		{
+			StatusText->SetText(FText::FromString(GetStatusText()));
+		}
 		return;
 	}
 
 	Mesh->SetWorldRotation(Motion->GetOrientationQuat());
+
+	if (StatusText)
+	{
+		StatusText->SetText(FText::FromString(GetStatusText()));
+	}
 }
 
 void AGamepadMotionActor::Recenter()
@@ -144,6 +185,7 @@ void AGamepadMotionActor::Recenter()
 	if (UGamepadMotionSensorsSubsystem* Motion = GetMotionSubsystem())
 	{
 		Motion->Recenter();
+		RecenterFlashSeconds = 0.6f;
 	}
 }
 

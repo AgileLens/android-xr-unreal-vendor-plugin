@@ -1,0 +1,15 @@
+-L/usr/lib/swift
+-arch arm64
+-isysroot "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk"
+-target arm64-apple-macos14.00
+-dead_strip
+-dynamiclib
+-headerpad_max_install_names
+-current_version 5.6.0
+-compatibility_version 5.6.0
+-rpath @loader_path/ -rpath @executable_path/
+-undefined dynamic_lookup
+-Wl,-no_fixup_chains
+-install_name "@rpath/UnrealEditor-AndroidXRSpatialEntities.dylib"
+"/Users/alex/dev/android-xr-unreal-vendor-plugin/Projects/UnrealSamples/Plugins/AndroidXRSpatialEntities/Intermediate/Build/Mac/arm64/UnrealEditor/Development/AndroidXRSpatialEntities/Module.AndroidXRSpatialEntities.cpp.o"
+-o "/Users/alex/dev/android-xr-unreal-vendor-plugin/Projects/UnrealSamples/Intermediate/Mac/Stubs/arm64/Development/UnrealEditor-AndroidXRSpatialEntities.dylib"

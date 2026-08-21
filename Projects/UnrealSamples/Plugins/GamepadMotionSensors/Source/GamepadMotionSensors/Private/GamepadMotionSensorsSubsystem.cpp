@@ -234,9 +234,22 @@ float UGamepadMotionSensorsSubsystem::GetSampleRateHz() const
 
 #if PLATFORM_ANDROID
 /**
- * Android sensor axes are right-handed X-right / Y-up / Z-toward-user; Unreal is
- * left-handed X-forward / Y-right / Z-up. Remap on the way in so Blueprint sees
- * Unreal-space values rather than raw sensor axes.
+ * Android sensor axes are right-handed: X right, Y up, Z out of the screen
+ * toward the user. Unreal is left-handed: X forward, Y right, Z up.
+ *
+ * Axis correspondence for a controller held pointing away from you:
+ *     Unreal X (forward) = -Android Z      (Android Z points back at the user)
+ *     Unreal Y (right)   = +Android X
+ *     Unreal Z (up)      = +Android Y
+ *
+ * A true vector (acceleration) takes that permutation directly. A rotation
+ * additionally reverses direction when the handedness flips, so the quaternion's
+ * vector part is permuted and then negated:
+ *
+ *     q_unreal = ( w, +z, -x, -y )     from q_android = ( w, x, y, z )
+ *
+ * Angular velocity is a pseudovector and follows the same sign convention as
+ * the quaternion so that the reported rates match the visible rotation.
  */
 extern "C" JNIEXPORT void JNICALL
 Java_com_epicgames_unreal_GameActivity_nativeGamepadMotionUpdate(
@@ -246,10 +259,17 @@ Java_com_epicgames_unreal_GameActivity_nativeGamepadMotionUpdate(
     jfloat ax, jfloat ay, jfloat az,
     jfloat hz)
 {
-    const FQuat Orientation(-static_cast<float>(qz), -static_cast<float>(qx),
-                             static_cast<float>(qy),  static_cast<float>(qw));
-    const FVector Gyro(-static_cast<float>(gz), -static_cast<float>(gx), static_cast<float>(gy));
-    const FVector Accel(-static_cast<float>(az), -static_cast<float>(ax), static_cast<float>(ay));
+    const FQuat Orientation(
+        static_cast<float>(qz),      // X =  +z
+        -static_cast<float>(qx),     // Y =  -x
+        -static_cast<float>(qy),     // Z =  -y
+        static_cast<float>(qw));
+
+    const FVector Gyro(
+        static_cast<float>(gz), -static_cast<float>(gx), -static_cast<float>(gy));
+
+    const FVector Accel(
+        -static_cast<float>(az), static_cast<float>(ax), static_cast<float>(ay));
 
     UGamepadMotionSensorsSubsystem::HandleMotionUpdate(
         Orientation.GetNormalized(), Gyro, Accel, static_cast<float>(hz));

@@ -1,0 +1,31 @@
+-L/usr/lib/swift
+-arch arm64
+-isysroot "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk"
+-target arm64-apple-macos14.00
+-dead_strip
+-dynamiclib
+-headerpad_max_install_names
+-current_version 5.6.0
+-compatibility_version 5.6.0
+-rpath @loader_path/ -rpath @executable_path/
+"/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/PrivateFrameworks/MultitouchSupport.framework/Versions/Current/MultitouchSupport.tbd"
+"/Users/alex/dev/android-xr-unreal-vendor-plugin/Projects/UnrealSamples/Plugins/AndroidXR/Binaries/Mac/UnrealEditor-AndroidXR.dylib"
+"../Binaries/Mac/UnrealEditor-Core.dylib"
+-rpath "@loader_path/../../../../../../../../../Shared/GH/UnrealEngineVisionOS/Engine/Binaries/Mac"
+"../Binaries/Mac/UnrealEditor-CoreUObject.dylib"
+"../Binaries/Mac/UnrealEditor-Engine.dylib"
+"../Binaries/Mac/UnrealEditor-Projects.dylib"
+-framework "Cocoa"
+-framework "Carbon"
+-framework "IOKit"
+-framework "Security"
+-framework "UniformTypeIdentifiers"
+-framework "Network"
+-framework "ScreenCaptureKit"
+-framework "SystemConfiguration"
+-framework "AVFoundation"
+-framework "CoreVideo"
+-framework "CoreMedia"
+-install_name "@rpath/UnrealEditor-AndroidXREditor.dylib"
+"/Users/alex/dev/android-xr-unreal-vendor-plugin/Projects/UnrealSamples/Plugins/AndroidXR/Intermediate/Build/Mac/arm64/UnrealEditor/Development/AndroidXREditor/Module.AndroidXREditor.cpp.o"
+-o "/Users/alex/dev/android-xr-unreal-vendor-plugin/Projects/UnrealSamples/Plugins/AndroidXR/Binaries/Mac/UnrealEditor-AndroidXREditor.dylib"

@@ -44,6 +44,10 @@ public:
 	virtual void Tick(float DeltaSeconds) override;
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent);
 
+	/** In-world readout, so the sample needs no UMG setup to be useful. */
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Gamepad Motion")
+	TObjectPtr<class UTextRenderComponent> StatusText;
+
 	/** Mesh driven by the controller's orientation. */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Gamepad Motion")
 	TObjectPtr<class UStaticMeshComponent> Mesh;
@@ -79,4 +83,7 @@ private:
 	 * periodically rather than only once at BeginPlay.
 	 */
 	float RetryAccumulator = 0.0f;
+
+	/** Briefly confirms a recenter happened, since the cube snapping is subtle. */
+	float RecenterFlashSeconds = 0.0f;
 };
