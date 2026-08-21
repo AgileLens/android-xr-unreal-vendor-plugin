@@ -41,6 +41,7 @@ public class UnrealSamples : ModuleRules
             "AndroidPermission",
             "AndroidXR",
             "AndroidXRDepthTexture",
+            "GamepadMotionSensors",
             "AndroidXREyeTracking",
             "AndroidXRPassthroughMesh",
             "AndroidXRLightEstimation",

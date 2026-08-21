@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2026 Google LLC -->
+<!---->
+<!-- Licensed under the Apache License, Version 2.0 (the "License"); -->
+<!-- you may not use this file except in compliance with the License. -->
+<!-- You may obtain a copy of the License at -->
+<!-- -->
+<!--     https://www.apache.org/licenses/LICENSE-2.0 -->
+<!-- -->
+<!-- Unless required by applicable law or agreed to in writing, software -->
+<!-- distributed under the License is distributed on an "AS IS" BASIS, -->
+<!-- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. -->
+<!-- See the License for the specific language governing permissions and -->
+<!-- limitations under the License. -->
+<!-- GamepadMotionSensors plugin additions -->
+<root xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <androidManifestUpdates>
+        <!-- Without this the platform throttles input-device sensors to 200 Hz.
+             Observed delivery on the Android XR devices tested is ~89 Hz either
+             way (display rate); the declaration lets capable devices run faster. -->
+        <addPermission android:name="android.permission.HIGH_SAMPLING_RATE_SENSORS" />
+    </androidManifestUpdates>
+
+    <gameActivityImportAdditions>
+        <insert>
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
+import android.hardware.input.InputManager;
+import android.hardware.BatteryState;
+import android.view.InputDevice;
+        </insert>
+    </gameActivityImportAdditions>
+
+    <gameActivityClassAdditions>
+        <insert>
+    // ---- Gamepad motion sensors -------------------------------------------
+    //
+    // Android exposes a gamepad's IMU through InputDevice.getSensorManager()
+    // (API 31+), a *per-device* SensorManager distinct from the global one --
+    // the global SensorManager only carries the host device's own sensors.
+    //
+    // Orientation is integrated from the gyroscope as a quaternion. The
+    // accelerometer is reported for gravity reference but is not fused here:
+    // yaw has no absolute reference and will drift, so callers should expose a
+    // recenter action. This mirrors how 3DoF controllers have always behaved.
+
+    private SensorManager GamepadMotion_SensorManager = null;
+    private SensorEventListener GamepadMotion_Listener = null;
+    private int GamepadMotion_DeviceId = -1;
+    private String GamepadMotion_DeviceName = "";
+
+    private final float[] GamepadMotion_Quat = new float[] { 1.0f, 0.0f, 0.0f, 0.0f };
+    private final float[] GamepadMotion_Gyro = new float[3];
+    private final float[] GamepadMotion_Accel = new float[3];
+    private long GamepadMotion_LastGyroNs = 0;
+    private long GamepadMotion_WindowStartMs = 0;
+    private int GamepadMotion_WindowCount = 0;
+    private float GamepadMotion_Hz = 0.0f;
+
+    public native void nativeGamepadMotionUpdate(float qw, float qx, float qy, float qz,
+                                                 float gx, float gy, float gz,
+                                                 float ax, float ay, float az,
+                                                 float hz);
+
+    /** Attaches to the first connected input device exposing a gyroscope. */
+    public boolean AndroidThunkJava_StartGamepadMotion()
+    {
+        if (GamepadMotion_SensorManager != null)
+        {
+            return true;
+        }
+
+        InputManager inputManager = (InputManager) getSystemService(INPUT_SERVICE);
+        if (inputManager == null)
+        {
+            return false;
+        }
+
+        for (int deviceId : inputManager.getInputDeviceIds())
+        {
+            InputDevice device = inputManager.getInputDevice(deviceId);
+            if (device == null)
+            {
+                continue;
+            }
+
+            SensorManager sensorManager;
+            try
+            {
+                sensorManager = device.getSensorManager();
+            }
+            catch (Throwable t)
+            {
+                continue;
+            }
+            if (sensorManager == null)
+            {
+                continue;
+            }
+
+            Sensor gyro = sensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE);
+            if (gyro == null)
+            {
+                continue;
+            }
+            Sensor accel = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+
+            GamepadMotion_Listener = new SensorEventListener()
+            {
+                @Override
+                public void onSensorChanged(SensorEvent event)
+                {
+                    GamepadMotion_OnSensorEvent(event);
+                }
+
+                @Override
+                public void onAccuracyChanged(Sensor sensor, int accuracy) { }
+            };
+
+            sensorManager.registerListener(GamepadMotion_Listener, gyro,
+                    SensorManager.SENSOR_DELAY_FASTEST);
+            if (accel != null)
+            {
+                sensorManager.registerListener(GamepadMotion_Listener, accel,
+                        SensorManager.SENSOR_DELAY_GAME);
+            }
+
+            GamepadMotion_SensorManager = sensorManager;
+            GamepadMotion_DeviceId = deviceId;
+            GamepadMotion_DeviceName = device.getName();
+            return true;
+        }
+
+        return false;
+    }
+
+    public void AndroidThunkJava_StopGamepadMotion()
+    {
+        if (GamepadMotion_SensorManager != null &amp;&amp; GamepadMotion_Listener != null)
+        {
+            GamepadMotion_SensorManager.unregisterListener(GamepadMotion_Listener);
+        }
+        GamepadMotion_SensorManager = null;
+        GamepadMotion_Listener = null;
+        GamepadMotion_DeviceId = -1;
+        GamepadMotion_DeviceName = "";
+    }
+
+    public void AndroidThunkJava_RecenterGamepadMotion()
+    {
+        synchronized (GamepadMotion_Quat)
+        {
+            GamepadMotion_Quat[0] = 1.0f;
+            GamepadMotion_Quat[1] = 0.0f;
+            GamepadMotion_Quat[2] = 0.0f;
+            GamepadMotion_Quat[3] = 0.0f;
+        }
+    }
+
+    public String AndroidThunkJava_GetGamepadMotionDeviceName()
+    {
+        return GamepadMotion_DeviceName;
+    }
+
+    /**
+     * Battery charge of the attached controller, 0..1, or -1 when unknown.
+     * Wireless gamepads report this through the input device rather than
+     * through the system battery manager.
+     */
+    public float AndroidThunkJava_GetGamepadBatteryLevel()
+    {
+        if (GamepadMotion_DeviceId &lt; 0)
+        {
+            return -1.0f;
+        }
+        InputManager inputManager = (InputManager) getSystemService(INPUT_SERVICE);
+        if (inputManager == null)
+        {
+            return -1.0f;
+        }
+        InputDevice device = inputManager.getInputDevice(GamepadMotion_DeviceId);
+        if (device == null)
+        {
+            return -1.0f;
+        }
+        try
+        {
+            BatteryState battery = device.getBatteryState();
+            if (battery != null &amp;&amp; battery.isPresent())
+            {
+                return battery.getCapacity();
+            }
+        }
+        catch (Throwable t)
+        {
+            // Not all devices report a battery state.
+        }
+        return -1.0f;
+    }
+
+    private void GamepadMotion_OnSensorEvent(SensorEvent event)
+    {
+        if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER)
+        {
+            System.arraycopy(event.values, 0, GamepadMotion_Accel, 0, 3);
+            return;
+        }
+        if (event.sensor.getType() != Sensor.TYPE_GYROSCOPE)
+        {
+            return;
+        }
+
+        System.arraycopy(event.values, 0, GamepadMotion_Gyro, 0, 3);
+
+        long nowMs = System.currentTimeMillis();
+        if (GamepadMotion_WindowStartMs == 0)
+        {
+            GamepadMotion_WindowStartMs = nowMs;
+        }
+        GamepadMotion_WindowCount++;
+        long elapsed = nowMs - GamepadMotion_WindowStartMs;
+        if (elapsed >= 1000)
+        {
+            GamepadMotion_Hz = (GamepadMotion_WindowCount * 1000.0f) / elapsed;
+            GamepadMotion_WindowStartMs = nowMs;
+            GamepadMotion_WindowCount = 0;
+        }
+
+        if (GamepadMotion_LastGyroNs != 0)
+        {
+            float dt = (event.timestamp - GamepadMotion_LastGyroNs) * 1.0e-9f;
+            // Guard against clock jumps and the first sample after a stall.
+            if (dt > 0.0f &amp;&amp; dt &lt; 0.5f)
+            {
+                GamepadMotion_Integrate(event.values, dt);
+            }
+        }
+        GamepadMotion_LastGyroNs = event.timestamp;
+
+        synchronized (GamepadMotion_Quat)
+        {
+            nativeGamepadMotionUpdate(
+                GamepadMotion_Quat[0], GamepadMotion_Quat[1],
+                GamepadMotion_Quat[2], GamepadMotion_Quat[3],
+                GamepadMotion_Gyro[0], GamepadMotion_Gyro[1], GamepadMotion_Gyro[2],
+                GamepadMotion_Accel[0], GamepadMotion_Accel[1], GamepadMotion_Accel[2],
+                GamepadMotion_Hz);
+        }
+    }
+
+    /** q &lt;- q * exp(0.5 * omega * dt), renormalized. */
+    private void GamepadMotion_Integrate(float[] omega, float dt)
+    {
+        float hx = omega[0] * dt * 0.5f;
+        float hy = omega[1] * dt * 0.5f;
+        float hz = omega[2] * dt * 0.5f;
+
+        synchronized (GamepadMotion_Quat)
+        {
+            float w = GamepadMotion_Quat[0];
+            float x = GamepadMotion_Quat[1];
+            float y = GamepadMotion_Quat[2];
+            float z = GamepadMotion_Quat[3];
+
+            GamepadMotion_Quat[0] = w - x * hx - y * hy - z * hz;
+            GamepadMotion_Quat[1] = x + w * hx + y * hz - z * hy;
+            GamepadMotion_Quat[2] = y + w * hy + z * hx - x * hz;
+            GamepadMotion_Quat[3] = z + w * hz + x * hy - y * hx;
+
+            float n = (float) Math.sqrt(
+                  GamepadMotion_Quat[0] * GamepadMotion_Quat[0]
+                + GamepadMotion_Quat[1] * GamepadMotion_Quat[1]
+                + GamepadMotion_Quat[2] * GamepadMotion_Quat[2]
+                + GamepadMotion_Quat[3] * GamepadMotion_Quat[3]);
+            if (n > 1.0e-6f)
+            {
+                GamepadMotion_Quat[0] /= n;
+                GamepadMotion_Quat[1] /= n;
+                GamepadMotion_Quat[2] /= n;
+                GamepadMotion_Quat[3] /= n;
+            }
+        }
+    }
+        </insert>
+    </gameActivityClassAdditions>
+
+    <gameActivityOnDestroyAdditions>
+        <insert>
+        AndroidThunkJava_StopGamepadMotion();
+        </insert>
+    </gameActivityOnDestroyAdditions>
+
+</root>
