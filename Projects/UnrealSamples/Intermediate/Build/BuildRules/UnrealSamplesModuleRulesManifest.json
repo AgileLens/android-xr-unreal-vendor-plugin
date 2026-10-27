@@ -1,0 +1,33 @@
+{
+	"SourceFiles": [
+		"/Users/alex/dev/android-xr-unreal-vendor-plugin/Projects/UnrealSamples/Source/UnrealSamples/UnrealSamples.Build.cs",
+		"/Users/alex/dev/android-xr-unreal-vendor-plugin/Projects/UnrealSamples/Plugins/AndroidXR/Source/AndroidXR/AndroidXR.Build.cs",
+		"/Users/alex/dev/android-xr-unreal-vendor-plugin/Projects/UnrealSamples/Plugins/AndroidXR/Source/AndroidXREditor/AndroidXREditor.Build.cs",
+		"/Users/alex/dev/android-xr-unreal-vendor-plugin/Projects/UnrealSamples/Plugins/AndroidXR/Source/AndroidXRTrackingSubsystem/AndroidXRTrackingSubsystem.Build.cs",
+		"/Users/alex/dev/android-xr-unreal-vendor-plugin/Projects/UnrealSamples/Plugins/AndroidXRDepthTexture/Source/AndroidXRDepthTexture/AndroidXRDepthTexture.Build.cs",
+		"/Users/alex/dev/android-xr-unreal-vendor-plugin/Projects/UnrealSamples/Plugins/AndroidXRDeviceAnchorPersistence/Source/AndroidXRDeviceAnchorPersistence/AndroidXRDeviceAnchorPersistence.Build.cs",
+		"/Users/alex/dev/android-xr-unreal-vendor-plugin/Projects/UnrealSamples/Plugins/AndroidXREyeTracking/Source/AndroidXREyeTracking/AndroidXREyeTracking.Build.cs",
+		"/Users/alex/dev/android-xr-unreal-vendor-plugin/Projects/UnrealSamples/Plugins/AndroidXRFaceTracking/Source/AndroidXRFaceTracking/AndroidXRFaceTracking.Build.cs",
+		"/Users/alex/dev/android-xr-unreal-vendor-plugin/Projects/UnrealSamples/Plugins/AndroidXRGlobalPassthroughDimming/Source/AndroidXRGlobalPassthroughDimming/AndroidXRGlobalPassthroughDimming.Build.cs",
+		"/Users/alex/dev/android-xr-unreal-vendor-plugin/Projects/UnrealSamples/Plugins/AndroidXRLightEstimation/Source/AndroidXRLightEstimation/AndroidXRLightEstimation.Build.cs",
+		"/Users/alex/dev/android-xr-unreal-vendor-plugin/Projects/UnrealSamples/Plugins/AndroidXRPassthroughMesh/Source/AndroidXRPassthroughMesh/AndroidXRPassthroughMesh.Build.cs",
+		"/Users/alex/dev/android-xr-unreal-vendor-plugin/Projects/UnrealSamples/Plugins/AndroidXRPerformanceMetrics/Source/AndroidXRPerformanceMetrics/AndroidXRPerformanceMetrics.Build.cs",
+		"/Users/alex/dev/android-xr-unreal-vendor-plugin/Projects/UnrealSamples/Plugins/AndroidXRRecommendedResolution/Source/AndroidXRRecommendedResolution/AndroidXRRecommendedResolution.Build.cs",
+		"/Users/alex/dev/android-xr-unreal-vendor-plugin/Projects/UnrealSamples/Plugins/AndroidXRSceneMeshing/Source/AndroidXRSceneMeshing/AndroidXRSceneMeshing.Build.cs",
+		"/Users/alex/dev/android-xr-unreal-vendor-plugin/Projects/UnrealSamples/Plugins/AndroidXRSpatialAnchors/Source/AndroidXRSpatialAnchors/AndroidXRSpatialAnchors.Build.cs",
+		"/Users/alex/dev/android-xr-unreal-vendor-plugin/Projects/UnrealSamples/Plugins/AndroidXRSpatialEntities/Source/AndroidXRSpatialEntities/AndroidXRSpatialEntities.Build.cs",
+		"/Users/alex/dev/android-xr-unreal-vendor-plugin/Projects/UnrealSamples/Plugins/AndroidXRSpatialMarkerTracking/Source/AndroidXRSpatialMarkerTracking/AndroidXRSpatialMarkerTracking.Build.cs",
+		"/Users/alex/dev/android-xr-unreal-vendor-plugin/Projects/UnrealSamples/Plugins/AndroidXRSpatialPlaneTracking/Source/AndroidXRSpatialPlaneTracking/AndroidXRSpatialPlaneTracking.Build.cs",
+		"/Users/alex/dev/android-xr-unreal-vendor-plugin/Projects/UnrealSamples/Plugins/AndroidXRStreaming/Source/AndroidXRStreaming/AndroidXRStreaming.Build.cs",
+		"/Users/alex/dev/android-xr-unreal-vendor-plugin/Projects/UnrealSamples/Plugins/AndroidXRStreaming/Source/AndroidXRStreamingEditor/AndroidXRStreamingEditor.Build.cs",
+		"/Users/alex/dev/android-xr-unreal-vendor-plugin/Projects/UnrealSamples/Plugins/AndroidXRSystemExtensionProperties/Source/AndroidXRSystemExtensionProperties/AndroidXRSystemExtensionProperties.Build.cs",
+		"/Users/alex/dev/android-xr-unreal-vendor-plugin/Projects/UnrealSamples/Plugins/AndroidXRTrackablesCore/Source/AndroidXRTrackablesCore/AndroidXRTrackablesCore.Build.cs",
+		"/Users/alex/dev/android-xr-unreal-vendor-plugin/Projects/UnrealSamples/Plugins/AndroidXRTrackablesObject/Source/AndroidXRTrackablesObject/AndroidXRTrackablesObject.Build.cs",
+		"/Users/alex/dev/android-xr-unreal-vendor-plugin/Projects/UnrealSamples/Plugins/HandInteraction/Source/HandInteraction/HandInteraction.Build.cs",
+		"/Users/alex/dev/android-xr-unreal-vendor-plugin/Projects/UnrealSamples/Plugins/HandInteractionInputDevice/Source/HandInteractionInputDevice/HandInteractionInputDevice.Build.cs",
+		"/Users/alex/dev/android-xr-unreal-vendor-plugin/Projects/UnrealSamples/Plugins/HandTrackingMesh/Source/HandTrackingMesh/HandTrackingMesh.Build.cs",
+		"/Users/alex/dev/android-xr-unreal-vendor-plugin/Projects/UnrealSamples/Source/UnrealSamples.Target.cs",
+		"/Users/alex/dev/android-xr-unreal-vendor-plugin/Projects/UnrealSamples/Source/UnrealSamplesEditor.Target.cs"
+	],
+	"EngineVersion": "5.8.1"
+}

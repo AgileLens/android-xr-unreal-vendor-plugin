@@ -1,0 +1,592 @@
+{
+  "IsGameTarget": false,
+  "RootLocalPath": "/Users/Shared/GH/UnrealEngineVisionOS",
+  "TargetName": "ShaderCompileWorker",
+  "ExternalDependenciesFile": "/Users/alex/dev/android-xr-unreal-vendor-plugin/Projects/UnrealSamples/Intermediate/Build/Mac/ShaderCompileWorker/Development/ShaderCompileWorker.deps",
+  "Modules": [
+    {
+      "Name": "CoreUObject",
+      "ModuleType": "EngineRuntime",
+      "OverrideModuleType": "None",
+      "BaseDirectory": "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/CoreUObject",
+      "IncludePaths": [
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/CoreUObject/Public",
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/CoreUObject/Internal",
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/CoreUObject/Private"
+      ],
+      "OutputDirectory": "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Intermediate/Build/Mac/ShaderCompileWorker/Inc/CoreUObject/UHT",
+      "ClassesHeaders": [],
+      "PublicHeaders": [
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/CoreUObject/Public/Misc/DataValidation.h",
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/CoreUObject/Public/Misc/EditorPathObjectInterface.h",
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/CoreUObject/Public/VerseVM/VVMVerseEnum.h",
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/CoreUObject/Public/VerseVM/VVMVerseFunction.h",
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/CoreUObject/Public/VerseVM/VVMPackageTypes.h",
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/CoreUObject/Public/VerseVM/VVMVerseEffectSet.h",
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/CoreUObject/Public/VerseVM/VVMProfilingLibrary.h",
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/CoreUObject/Public/VerseVM/VVMVerseStruct.h",
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/CoreUObject/Public/VerseVM/VVMVerseClass.h",
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/CoreUObject/Public/StructUtils/PropertyBag.h",
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/CoreUObject/Public/StructUtils/SharedStruct.h",
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/CoreUObject/Public/StructUtils/UserDefinedStruct.h",
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/CoreUObject/Public/StructUtils/UserDefinedStructEditorUtils.h",
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/CoreUObject/Public/StructUtils/InstancedStruct.h",
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/CoreUObject/Public/StructUtils/InstancedStructContainer.h",
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/CoreUObject/Public/UObject/OverriddenPropertySet.h",
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/CoreUObject/Public/UObject/NoExportTypes.h",
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/CoreUObject/Public/UObject/PropertyText.h",
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/CoreUObject/Public/UObject/MetaData.h",
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/CoreUObject/Public/UObject/CoreNetTypes.h",
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/CoreUObject/Public/UObject/PerPlatformProperties.h",
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/CoreUObject/Public/UObject/OverridableManager.h",
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/CoreUObject/Public/UObject/CookedMetaData.h"
+      ],
+      "InternalHeaders": [],
+      "PrivateHeaders": [
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/CoreUObject/Tests/OptionalPropertyTestObject.h",
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/CoreUObject/Tests/UObject/PropertyPathFunctionsTest.h",
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/CoreUObject/Tests/UObject/PropertyStateTrackingTest.h",
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/CoreUObject/Private/UObject/PropertyHelper.h"
+      ],
+      "PublicDefines": [
+        "WITH_VERSE_COMPILER=1"
+      ],
+      "GeneratedCPPFilenameBase": "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Intermediate/Build/Mac/ShaderCompileWorker/Inc/CoreUObject/UHT/CoreUObject.gen",
+      "SaveExportedHeaders": true,
+      "UHTGeneratedCodeVersion": "None",
+      "VersePath": "",
+      "VerseScope": "PublicUser",
+      "HasVerse": false,
+      "VerseMountPoint": "",
+      "AlwaysExportStructs": true,
+      "AlwaysExportEnums": true
+    },
+    {
+      "Name": "ImageCore",
+      "ModuleType": "EngineRuntime",
+      "OverrideModuleType": "None",
+      "BaseDirectory": "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/ImageCore",
+      "IncludePaths": [
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/ImageCore/Public",
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/ImageCore/Private"
+      ],
+      "OutputDirectory": "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Intermediate/Build/Mac/ShaderCompileWorker/Inc/ImageCore/UHT",
+      "ClassesHeaders": [],
+      "PublicHeaders": [
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/ImageCore/Public/ImageCoreBP.h"
+      ],
+      "InternalHeaders": [],
+      "PrivateHeaders": [],
+      "PublicDefines": [],
+      "GeneratedCPPFilenameBase": "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Intermediate/Build/Mac/ShaderCompileWorker/Inc/ImageCore/UHT/ImageCore.gen",
+      "SaveExportedHeaders": true,
+      "UHTGeneratedCodeVersion": "None",
+      "VersePath": "",
+      "VerseScope": "PublicUser",
+      "HasVerse": false,
+      "VerseMountPoint": "",
+      "AlwaysExportStructs": true,
+      "AlwaysExportEnums": true
+    },
+    {
+      "Name": "AssetRegistry",
+      "ModuleType": "EngineRuntime",
+      "OverrideModuleType": "None",
+      "BaseDirectory": "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/AssetRegistry",
+      "IncludePaths": [
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/AssetRegistry/Public",
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/AssetRegistry/Internal",
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/AssetRegistry/Private"
+      ],
+      "OutputDirectory": "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Intermediate/Build/Mac/ShaderCompileWorker/Inc/AssetRegistry/UHT",
+      "ClassesHeaders": [],
+      "PublicHeaders": [
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/AssetRegistry/Public/AssetRegistry/IAssetRegistry.h",
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/AssetRegistry/Public/AssetRegistry/AssetRegistryHelpers.h"
+      ],
+      "InternalHeaders": [],
+      "PrivateHeaders": [
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/AssetRegistry/Private/AssetRegistry.h"
+      ],
+      "PublicDefines": [],
+      "GeneratedCPPFilenameBase": "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Intermediate/Build/Mac/ShaderCompileWorker/Inc/AssetRegistry/UHT/AssetRegistry.gen",
+      "SaveExportedHeaders": true,
+      "UHTGeneratedCodeVersion": "None",
+      "VersePath": "",
+      "VerseScope": "PublicUser",
+      "HasVerse": false,
+      "VerseMountPoint": "",
+      "AlwaysExportStructs": true,
+      "AlwaysExportEnums": true
+    },
+    {
+      "Name": "SessionMessages",
+      "ModuleType": "EngineRuntime",
+      "OverrideModuleType": "None",
+      "BaseDirectory": "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/SessionMessages",
+      "IncludePaths": [
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/SessionMessages/Public",
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/SessionMessages/Private"
+      ],
+      "OutputDirectory": "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Intermediate/Build/Mac/ShaderCompileWorker/Inc/SessionMessages/UHT",
+      "ClassesHeaders": [],
+      "PublicHeaders": [
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/SessionMessages/Public/SessionServiceMessages.h"
+      ],
+      "InternalHeaders": [],
+      "PrivateHeaders": [],
+      "PublicDefines": [],
+      "GeneratedCPPFilenameBase": "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Intermediate/Build/Mac/ShaderCompileWorker/Inc/SessionMessages/UHT/SessionMessages.gen",
+      "SaveExportedHeaders": true,
+      "UHTGeneratedCodeVersion": "None",
+      "VersePath": "",
+      "VerseScope": "PublicUser",
+      "HasVerse": false,
+      "VerseMountPoint": "",
+      "AlwaysExportStructs": true,
+      "AlwaysExportEnums": true
+    },
+    {
+      "Name": "AudioPlatformConfiguration",
+      "ModuleType": "EngineRuntime",
+      "OverrideModuleType": "None",
+      "BaseDirectory": "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/AudioPlatformConfiguration",
+      "IncludePaths": [
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/AudioPlatformConfiguration/Public",
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/AudioPlatformConfiguration/Private"
+      ],
+      "OutputDirectory": "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Intermediate/Build/Mac/ShaderCompileWorker/Inc/AudioPlatformConfiguration/UHT",
+      "ClassesHeaders": [],
+      "PublicHeaders": [
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/AudioPlatformConfiguration/Public/AudioCompressionSettings.h"
+      ],
+      "InternalHeaders": [],
+      "PrivateHeaders": [],
+      "PublicDefines": [],
+      "GeneratedCPPFilenameBase": "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Intermediate/Build/Mac/ShaderCompileWorker/Inc/AudioPlatformConfiguration/UHT/AudioPlatformConfiguration.gen",
+      "SaveExportedHeaders": true,
+      "UHTGeneratedCodeVersion": "None",
+      "VersePath": "",
+      "VerseScope": "PublicUser",
+      "HasVerse": false,
+      "VerseMountPoint": "",
+      "AlwaysExportStructs": true,
+      "AlwaysExportEnums": true
+    },
+    {
+      "Name": "InputCore",
+      "ModuleType": "EngineRuntime",
+      "OverrideModuleType": "None",
+      "BaseDirectory": "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/InputCore",
+      "IncludePaths": [
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/InputCore/Classes",
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/InputCore/Public",
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/InputCore/Private"
+      ],
+      "OutputDirectory": "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Intermediate/Build/Mac/ShaderCompileWorker/Inc/InputCore/UHT",
+      "ClassesHeaders": [
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/InputCore/Classes/InputCoreTypes.h"
+      ],
+      "PublicHeaders": [],
+      "InternalHeaders": [],
+      "PrivateHeaders": [],
+      "PublicDefines": [],
+      "GeneratedCPPFilenameBase": "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Intermediate/Build/Mac/ShaderCompileWorker/Inc/InputCore/UHT/InputCore.gen",
+      "SaveExportedHeaders": true,
+      "UHTGeneratedCodeVersion": "None",
+      "VersePath": "",
+      "VerseScope": "PublicUser",
+      "HasVerse": false,
+      "VerseMountPoint": "",
+      "AlwaysExportStructs": true,
+      "AlwaysExportEnums": true
+    },
+    {
+      "Name": "DeveloperSettings",
+      "ModuleType": "EngineRuntime",
+      "OverrideModuleType": "None",
+      "BaseDirectory": "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/DeveloperSettings",
+      "IncludePaths": [
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/DeveloperSettings/Public",
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/DeveloperSettings/Private"
+      ],
+      "OutputDirectory": "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Intermediate/Build/Mac/ShaderCompileWorker/Inc/DeveloperSettings/UHT",
+      "ClassesHeaders": [],
+      "PublicHeaders": [
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/DeveloperSettings/Public/Engine/DeveloperSettingsBackedByCVars.h",
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/DeveloperSettings/Public/Engine/DeveloperSettings.h",
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/DeveloperSettings/Public/Engine/PlatformSettingsManager.h",
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/DeveloperSettings/Public/Engine/PlatformSettings.h"
+      ],
+      "InternalHeaders": [],
+      "PrivateHeaders": [],
+      "PublicDefines": [],
+      "GeneratedCPPFilenameBase": "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Intermediate/Build/Mac/ShaderCompileWorker/Inc/DeveloperSettings/UHT/DeveloperSettings.gen",
+      "SaveExportedHeaders": true,
+      "UHTGeneratedCodeVersion": "None",
+      "VersePath": "",
+      "VerseScope": "PublicUser",
+      "HasVerse": false,
+      "VerseMountPoint": "",
+      "AlwaysExportStructs": true,
+      "AlwaysExportEnums": true
+    },
+    {
+      "Name": "SlateCore",
+      "ModuleType": "EngineRuntime",
+      "OverrideModuleType": "None",
+      "BaseDirectory": "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/SlateCore",
+      "IncludePaths": [
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/SlateCore/Public",
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/SlateCore/Private"
+      ],
+      "OutputDirectory": "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Intermediate/Build/Mac/ShaderCompileWorker/Inc/SlateCore/UHT",
+      "ClassesHeaders": [],
+      "PublicHeaders": [
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/SlateCore/Public/Types/SlateEnums.h",
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/SlateCore/Public/Types/SlateVector2.h",
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/SlateCore/Public/Input/NavigationReply.h",
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/SlateCore/Public/Input/Events.h",
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/SlateCore/Public/Layout/Margin.h",
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/SlateCore/Public/Layout/Clipping.h",
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/SlateCore/Public/Layout/FlowDirection.h",
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/SlateCore/Public/Layout/Geometry.h",
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/SlateCore/Public/Debugging/SlateDebugging.h",
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/SlateCore/Public/Styling/SegmentedControlStyle.h",
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/SlateCore/Public/Styling/SlateBrush.h",
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/SlateCore/Public/Styling/StyleColors.h",
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/SlateCore/Public/Styling/SlateWidgetStyleContainerInterface.h",
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/SlateCore/Public/Styling/SlateWidgetStyle.h",
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/SlateCore/Public/Styling/SlateWidgetStyleAsset.h",
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/SlateCore/Public/Styling/SlateColor.h",
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/SlateCore/Public/Styling/ToolBarStyle.h",
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/SlateCore/Public/Styling/SlateWidgetStyleContainerBase.h",
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/SlateCore/Public/Styling/SlateTypes.h",
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/SlateCore/Public/Rendering/RenderingCommon.h",
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/SlateCore/Public/Rendering/SlateRendererTypes.h",
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/SlateCore/Public/Fonts/FontBulkData.h",
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/SlateCore/Public/Fonts/SlateFontInfo.h",
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/SlateCore/Public/Fonts/FontProviderInterface.h",
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/SlateCore/Public/Fonts/FontSdfSettings.h",
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/SlateCore/Public/Fonts/FontCache.h",
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/SlateCore/Public/Fonts/CompositeFont.h",
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/SlateCore/Public/Fonts/FontFaceInterface.h",
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/SlateCore/Public/Fonts/FontRasterizationMode.h",
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/SlateCore/Public/Sound/SlateSound.h",
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/SlateCore/Public/Widgets/WidgetPixelSnapping.h"
+      ],
+      "InternalHeaders": [],
+      "PrivateHeaders": [],
+      "PublicDefines": [
+        "WITH_FREETYPE=1"
+      ],
+      "GeneratedCPPFilenameBase": "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Intermediate/Build/Mac/ShaderCompileWorker/Inc/SlateCore/UHT/SlateCore.gen",
+      "SaveExportedHeaders": true,
+      "UHTGeneratedCodeVersion": "None",
+      "VersePath": "",
+      "VerseScope": "PublicUser",
+      "HasVerse": false,
+      "VerseMountPoint": "",
+      "AlwaysExportStructs": true,
+      "AlwaysExportEnums": true
+    },
+    {
+      "Name": "Slate",
+      "ModuleType": "EngineRuntime",
+      "OverrideModuleType": "None",
+      "BaseDirectory": "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/Slate",
+      "IncludePaths": [
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/Slate/Public",
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/ThirdParty/AHEasing/AHEasing-1.3.2",
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/Slate/Private"
+      ],
+      "OutputDirectory": "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Intermediate/Build/Mac/ShaderCompileWorker/Inc/Slate/UHT",
+      "ClassesHeaders": [],
+      "PublicHeaders": [
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/Slate/Public/SlateSettings.h",
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/Slate/Public/Framework/MultiBox/ToolMenuBase.h",
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/Slate/Public/Framework/MultiBox/MultiBoxDefs.h",
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/Slate/Public/Framework/Styling/ScrollBoxWidgetStyle.h",
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/Slate/Public/Framework/Styling/ScrollBarWidgetStyle.h",
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/Slate/Public/Framework/Styling/ComboButtonWidgetStyle.h",
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/Slate/Public/Framework/Styling/ButtonWidgetStyle.h",
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/Slate/Public/Framework/Styling/ProgressWidgetStyle.h",
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/Slate/Public/Framework/Styling/SpinBoxWidgetStyle.h",
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/Slate/Public/Framework/Styling/EditableTextBoxWidgetStyle.h",
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/Slate/Public/Framework/Styling/CheckBoxWidgetStyle.h",
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/Slate/Public/Framework/Styling/EditableTextWidgetStyle.h",
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/Slate/Public/Framework/Styling/TextBlockWidgetStyle.h",
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/Slate/Public/Framework/Styling/ComboBoxWidgetStyle.h",
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/Slate/Public/Framework/Commands/UICommandInfo.h",
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/Slate/Public/Framework/Commands/InputChord.h",
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/Slate/Public/Framework/Text/TextLayout.h",
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/Slate/Public/Framework/Text/CharRangeList.h",
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/Slate/Public/Framework/Application/SlateApplication.h",
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/Slate/Public/Framework/Views/ITypedTableView.h",
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/Slate/Public/Widgets/Input/IVirtualKeyboardEntry.h",
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/Slate/Public/Widgets/Layout/SScrollBox.h",
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/Slate/Public/Widgets/Layout/SScaleBox.h",
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/Slate/Public/Widgets/Layout/Anchors.h",
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/Slate/Public/Widgets/Text/ISlateEditableTextWidget.h",
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/Slate/Public/Widgets/Views/STableViewBase.h",
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/Slate/Public/Widgets/Notifications/SProgressBar.h"
+      ],
+      "InternalHeaders": [],
+      "PrivateHeaders": [],
+      "PublicDefines": [],
+      "GeneratedCPPFilenameBase": "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Intermediate/Build/Mac/ShaderCompileWorker/Inc/Slate/UHT/Slate.gen",
+      "SaveExportedHeaders": true,
+      "UHTGeneratedCodeVersion": "None",
+      "VersePath": "",
+      "VerseScope": "PublicUser",
+      "HasVerse": false,
+      "VerseMountPoint": "",
+      "AlwaysExportStructs": true,
+      "AlwaysExportEnums": true
+    },
+    {
+      "Name": "RenderCore",
+      "ModuleType": "EngineRuntime",
+      "OverrideModuleType": "None",
+      "BaseDirectory": "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/RenderCore",
+      "IncludePaths": [
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/RenderCore/Public",
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/RenderCore/Internal",
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/RenderCore/Private"
+      ],
+      "OutputDirectory": "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Intermediate/Build/Mac/ShaderCompileWorker/Inc/RenderCore/UHT",
+      "ClassesHeaders": [],
+      "PublicHeaders": [
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/RenderCore/Public/VirtualTextureEnum.h"
+      ],
+      "InternalHeaders": [],
+      "PrivateHeaders": [],
+      "PublicDefines": [],
+      "GeneratedCPPFilenameBase": "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Intermediate/Build/Mac/ShaderCompileWorker/Inc/RenderCore/UHT/RenderCore.gen",
+      "SaveExportedHeaders": true,
+      "UHTGeneratedCodeVersion": "None",
+      "VersePath": "",
+      "VerseScope": "PublicUser",
+      "HasVerse": false,
+      "VerseMountPoint": "",
+      "AlwaysExportStructs": true,
+      "AlwaysExportEnums": true
+    },
+    {
+      "Name": "EngineSettings",
+      "ModuleType": "EngineRuntime",
+      "OverrideModuleType": "None",
+      "BaseDirectory": "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/EngineSettings",
+      "IncludePaths": [
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/EngineSettings/Classes",
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/EngineSettings/Public",
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/EngineSettings/Private"
+      ],
+      "OutputDirectory": "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Intermediate/Build/Mac/ShaderCompileWorker/Inc/EngineSettings/UHT",
+      "ClassesHeaders": [
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/EngineSettings/Classes/GameMapsSettings.h",
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/EngineSettings/Classes/ConsoleSettings.h",
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/EngineSettings/Classes/GeneralProjectSettings.h",
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/EngineSettings/Classes/HudSettings.h",
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/EngineSettings/Classes/GeneralEngineSettings.h",
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/EngineSettings/Classes/GameSessionSettings.h",
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/EngineSettings/Classes/GameNetworkManagerSettings.h"
+      ],
+      "PublicHeaders": [],
+      "InternalHeaders": [],
+      "PrivateHeaders": [],
+      "PublicDefines": [],
+      "GeneratedCPPFilenameBase": "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Intermediate/Build/Mac/ShaderCompileWorker/Inc/EngineSettings/UHT/EngineSettings.gen",
+      "SaveExportedHeaders": true,
+      "UHTGeneratedCodeVersion": "None",
+      "VersePath": "",
+      "VerseScope": "PublicUser",
+      "HasVerse": false,
+      "VerseMountPoint": "",
+      "AlwaysExportStructs": true,
+      "AlwaysExportEnums": true
+    },
+    {
+      "Name": "VectorVM",
+      "ModuleType": "EngineRuntime",
+      "OverrideModuleType": "None",
+      "BaseDirectory": "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/VectorVM",
+      "IncludePaths": [
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/VectorVM/Public",
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/VectorVM/Private"
+      ],
+      "OutputDirectory": "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Intermediate/Build/Mac/ShaderCompileWorker/Inc/VectorVM/UHT",
+      "ClassesHeaders": [],
+      "PublicHeaders": [
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Runtime/VectorVM/Public/VectorVM.h"
+      ],
+      "InternalHeaders": [],
+      "PrivateHeaders": [],
+      "PublicDefines": [],
+      "GeneratedCPPFilenameBase": "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Intermediate/Build/Mac/ShaderCompileWorker/Inc/VectorVM/UHT/VectorVM.gen",
+      "SaveExportedHeaders": true,
+      "UHTGeneratedCodeVersion": "None",
+      "VersePath": "",
+      "VerseScope": "PublicUser",
+      "HasVerse": false,
+      "VerseMountPoint": "",
+      "AlwaysExportStructs": true,
+      "AlwaysExportEnums": true
+    },
+    {
+      "Name": "SourceControl",
+      "ModuleType": "EngineDeveloper",
+      "OverrideModuleType": "None",
+      "BaseDirectory": "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Developer/SourceControl",
+      "IncludePaths": [
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Developer/SourceControl/Public",
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Developer/SourceControl/Private"
+      ],
+      "OutputDirectory": "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Intermediate/Build/Mac/ShaderCompileWorker/Inc/SourceControl/UHT",
+      "ClassesHeaders": [],
+      "PublicHeaders": [
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Developer/SourceControl/Public/SourceControlPreferences.h",
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Developer/SourceControl/Public/SourceControlHelpers.h"
+      ],
+      "InternalHeaders": [],
+      "PrivateHeaders": [],
+      "PublicDefines": [
+        "SOURCE_CONTROL_WITH_SLATE=1"
+      ],
+      "GeneratedCPPFilenameBase": "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Intermediate/Build/Mac/ShaderCompileWorker/Inc/SourceControl/UHT/SourceControl.gen",
+      "SaveExportedHeaders": true,
+      "UHTGeneratedCodeVersion": "None",
+      "VersePath": "",
+      "VerseScope": "PublicUser",
+      "HasVerse": false,
+      "VerseMountPoint": "",
+      "AlwaysExportStructs": true,
+      "AlwaysExportEnums": true
+    },
+    {
+      "Name": "SourceCodeAccess",
+      "ModuleType": "EngineDeveloper",
+      "OverrideModuleType": "None",
+      "BaseDirectory": "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Developer/SourceCodeAccess",
+      "IncludePaths": [
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Developer/SourceCodeAccess/Public",
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Developer/SourceCodeAccess/Private"
+      ],
+      "OutputDirectory": "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Intermediate/Build/Mac/ShaderCompileWorker/Inc/SourceCodeAccess/UHT",
+      "ClassesHeaders": [],
+      "PublicHeaders": [],
+      "InternalHeaders": [],
+      "PrivateHeaders": [
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Developer/SourceCodeAccess/Private/SourceCodeAccessSettings.h"
+      ],
+      "PublicDefines": [],
+      "GeneratedCPPFilenameBase": "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Intermediate/Build/Mac/ShaderCompileWorker/Inc/SourceCodeAccess/UHT/SourceCodeAccess.gen",
+      "SaveExportedHeaders": true,
+      "UHTGeneratedCodeVersion": "None",
+      "VersePath": "",
+      "VerseScope": "PublicUser",
+      "HasVerse": false,
+      "VerseMountPoint": "",
+      "AlwaysExportStructs": true,
+      "AlwaysExportEnums": true
+    },
+    {
+      "Name": "ToolMenus",
+      "ModuleType": "EngineDeveloper",
+      "OverrideModuleType": "None",
+      "BaseDirectory": "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Developer/ToolMenus",
+      "IncludePaths": [
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Developer/ToolMenus/Public",
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Developer/ToolMenus/Private"
+      ],
+      "OutputDirectory": "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Intermediate/Build/Mac/ShaderCompileWorker/Inc/ToolMenus/UHT",
+      "ClassesHeaders": [],
+      "PublicHeaders": [
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Developer/ToolMenus/Public/ToolMenuDelegates.h",
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Developer/ToolMenus/Public/ToolMenus.h",
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Developer/ToolMenus/Public/ToolMenuOwner.h",
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Developer/ToolMenus/Public/ToolMenuWidgetCollectionContext.h",
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Developer/ToolMenus/Public/ToolMenu.h",
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Developer/ToolMenus/Public/ToolMenuMisc.h",
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Developer/ToolMenus/Public/ToolMenuEntryScript.h",
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Developer/ToolMenus/Public/ToolMenuContext.h",
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Developer/ToolMenus/Public/ToolMenuSection.h",
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Developer/ToolMenus/Public/ToolMenuEntry.h"
+      ],
+      "InternalHeaders": [],
+      "PrivateHeaders": [
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Developer/ToolMenus/Private/ToolMenusBlueprintLibrary.h"
+      ],
+      "PublicDefines": [],
+      "GeneratedCPPFilenameBase": "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Intermediate/Build/Mac/ShaderCompileWorker/Inc/ToolMenus/UHT/ToolMenus.gen",
+      "SaveExportedHeaders": true,
+      "UHTGeneratedCodeVersion": "None",
+      "VersePath": "",
+      "VerseScope": "PublicUser",
+      "HasVerse": false,
+      "VerseMountPoint": "",
+      "AlwaysExportStructs": true,
+      "AlwaysExportEnums": true
+    },
+    {
+      "Name": "DeveloperToolSettings",
+      "ModuleType": "EngineDeveloper",
+      "OverrideModuleType": "None",
+      "BaseDirectory": "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Developer/DeveloperToolSettings",
+      "IncludePaths": [
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Developer/DeveloperToolSettings/Classes",
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Developer/DeveloperToolSettings/Public",
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Developer/DeveloperToolSettings/Private"
+      ],
+      "OutputDirectory": "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Intermediate/Build/Mac/ShaderCompileWorker/Inc/DeveloperToolSettings/UHT",
+      "ClassesHeaders": [
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Developer/DeveloperToolSettings/Classes/CookerSettings.h",
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Developer/DeveloperToolSettings/Classes/Settings/ProjectPackagingSettings.h",
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Developer/DeveloperToolSettings/Classes/Settings/PlatformsMenuSettings.h"
+      ],
+      "PublicHeaders": [],
+      "InternalHeaders": [],
+      "PrivateHeaders": [],
+      "PublicDefines": [],
+      "GeneratedCPPFilenameBase": "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Intermediate/Build/Mac/ShaderCompileWorker/Inc/DeveloperToolSettings/UHT/DeveloperToolSettings.gen",
+      "SaveExportedHeaders": true,
+      "UHTGeneratedCodeVersion": "None",
+      "VersePath": "",
+      "VerseScope": "PublicUser",
+      "HasVerse": false,
+      "VerseMountPoint": "",
+      "AlwaysExportStructs": true,
+      "AlwaysExportEnums": true
+    },
+    {
+      "Name": "UnrealEdMessages",
+      "ModuleType": "EngineEditor",
+      "OverrideModuleType": "None",
+      "BaseDirectory": "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Editor/UnrealEdMessages",
+      "IncludePaths": [
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Editor/UnrealEdMessages/Classes",
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Editor/UnrealEdMessages/Public",
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Editor/UnrealEdMessages/Private"
+      ],
+      "OutputDirectory": "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Intermediate/Build/Mac/ShaderCompileWorker/Inc/UnrealEdMessages/UHT",
+      "ClassesHeaders": [
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Editor/UnrealEdMessages/Classes/FileServerMessages.h",
+        "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Source/Editor/UnrealEdMessages/Classes/AssetEditorMessages.h"
+      ],
+      "PublicHeaders": [],
+      "InternalHeaders": [],
+      "PrivateHeaders": [],
+      "PublicDefines": [],
+      "GeneratedCPPFilenameBase": "/Users/Shared/GH/UnrealEngineVisionOS/Engine/Intermediate/Build/Mac/ShaderCompileWorker/Inc/UnrealEdMessages/UHT/UnrealEdMessages.gen",
+      "SaveExportedHeaders": true,
+      "UHTGeneratedCodeVersion": "None",
+      "VersePath": "",
+      "VerseScope": "PublicUser",
+      "HasVerse": false,
+      "VerseMountPoint": "",
+      "AlwaysExportStructs": true,
+      "AlwaysExportEnums": true
+    }
+  ],
+  "UhtPlugins": []
+}
