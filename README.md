@@ -60,7 +60,7 @@ Linux is not supported.
 ## Supported Unreal Engine Versions
 - 5.6
 
-## How to use
+## Quickstart
 
 1.  Ensure your Unreal Engine project is closed.
 2.  Locate the main directory of your Unreal Engine project.
@@ -70,3 +70,13 @@ Linux is not supported.
 6.  Go to **Edit > Plugins** and ensure the newly installed plugins are listed under the "Installed" category and are enabled.
 7.  Go to **Edit > Project Settings > Platforms > Android** If there is a red box that states the project is not configured for the Android platform, click the **Configure Now** button and **Accept SDK License** if needed.
 8.  Package your project targeting **Android** platform.
+
+## Things to Try
+
+1. **Copy `Plugins/AndroidXR` into a clean Unreal Engine 5.6 project's `Plugins` folder and regenerate project files** — module setup should complete without either `DirectoryNotFoundException` documented in `FORK_NOTES.md`.
+2. **Enable one Android XR extension under Edit > Plugins** — it should appear in the Installed category alongside the required `AndroidXR` base plugin.
+3. **Open the `GamepadMotion` sample level and connect a Bluetooth gamepad with motion sensors** — the wand and text readout should begin reporting orientation, gyro, acceleration, sample rate, and battery data.
+4. **Press the bottom face button (A / cross) while aiming the gamepad forward** — the sample should recenter orientation and place the wand in front of the viewer.
+5. **Validate a copied plugin's `*_APL.xml` (for example `Plugins/AndroidXR/Source/AndroidXR/AndroidXR_APL.xml`) with Python's `xml.etree.ElementTree` before packaging** — the XML should parse cleanly, catching unescaped Java operators before Unreal's Android packaging stage.
+
+Maintained by **Agile Lens**.
